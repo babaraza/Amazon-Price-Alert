@@ -2,3 +2,4 @@ requests
 sendgrid
 gunicorn
 beautifulsoup4
+lxml
