@@ -1,0 +1,4 @@
+requests
+sendgrid
+gunicorn
+beautifulsoup4
