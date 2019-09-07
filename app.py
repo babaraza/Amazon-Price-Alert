@@ -32,16 +32,17 @@ for item in items:
         price = float(item.find(class_='twisterSwatchPrice').text.replace('$', '').strip())
         data[title] = price
 
-print(f'\nProduct: {product_title}')
-print(data)
+final_list = ''
+for k, v in data.items():
+    final_list += f'<br>{k} = ${v}'
 
 
 def send_mail(low_price):
     message = Mail(
-        from_email='support@razains.com',
+        from_email=('support@razains.com', 'My Deals'),
         to_emails='syedrazatx@gmail.com',
         subject=f'[Deal Alert] for {product_title}',
-        html_content=f'<strong>{product_title}</strong>\n\n<strong>Price: </strong>${low_price}')
+        html_content=f'<strong>{product_title}</strong><br><br><strong>Lowest Price: </strong>${low_price}<br>{final_list}')
     try:
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
