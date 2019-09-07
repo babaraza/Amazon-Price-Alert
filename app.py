@@ -53,7 +53,7 @@ def send_mail(low_price):
 
 
 lowest_price = min(data.values())
-if lowest_price < target_price:
+if lowest_price < float(target_price):
     send_mail(lowest_price)
 else:
     pass
