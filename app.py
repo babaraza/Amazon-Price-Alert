@@ -29,7 +29,10 @@ for item in items:
     if item.get('title'):
         # Cleaning up title and price
         title = item.get('title').replace('Click to select ', '')
-        price = float(item.find(class_='twisterSwatchPrice').text.replace('$', '').strip())
+        try:
+            price = float(item.find(class_='twisterSwatchPrice').text.replace('$', '').strip())
+        except AttributeError:
+            price = item.find(class_='olpMessageWrapper').text.replace('from', 'Available from ').strip()
         data[title] = price
 
 final_list = ''
@@ -53,7 +56,7 @@ def send_mail(low_price):
         print(e)
 
 
-lowest_price = min(data.values())
+lowest_price = min([value for value in data.values() if isinstance(value, float)])
 if lowest_price < float(target_price):
     send_mail(lowest_price)
 else:
