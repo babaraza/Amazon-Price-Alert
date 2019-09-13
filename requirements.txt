@@ -3,3 +3,4 @@ sendgrid
 gunicorn
 beautifulsoup4
 lxml
+flask
