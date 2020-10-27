@@ -42,8 +42,8 @@ for k, v in data.items():
 
 def send_mail(low_price):
     message = Mail(
-        from_email=('support@razains.com', 'My Deals'),
-        to_emails='syedrazatx@gmail.com',
+        from_email=(os.environ.get('EMAIL_FROM'), 'My Deals'),
+        to_emails=os.environ.get('EMAIL_TO'),
         subject=f'[Deal Alert] for {product_title}',
         html_content=f'<strong>{product_title}</strong><br><br><strong>Lowest Price: </strong>${low_price}<br>{final_list}')
     try:
